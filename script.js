@@ -120,6 +120,6 @@ async function getEnglishQuote() {
     // Stop loader, Show Quote
     complete();
   } catch (error) {
-    getEnglishQuote()
+    console.log(error);
   }
 }
