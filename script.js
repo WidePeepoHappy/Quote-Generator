@@ -47,7 +47,6 @@ async function getRussianQuote() {
     complete();
   } catch (error) {
     console.log(error)
-    getRussianQuote();
   }
 }
 
