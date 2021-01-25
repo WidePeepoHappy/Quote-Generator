@@ -19,36 +19,28 @@ function complete() {
     quoteContainer.hidden = false;
   }
 }
-
-// Get Quote From API
-
+// Get a russian quote from a JSON file
 async function getRussianQuote() {
   loading();
-  let number = Math.floor(Math.random() * 999999);
-  const proxyUrl = 'http://api.allorigins.win/get?url=';
-  const apiUrl = `http://api.forismatic.com/api/1.0/?method=getQuote&key=${number}&format=json&lang=ru`;
-  try {
-    const response = await fetch(proxyUrl + encodeURIComponent(apiUrl));
-    const data = await response.json();
-    const quoteObj = JSON.parse(data.contents);
-    if (quoteObj.quoteAuthor === '') {
-      authorText.innerText = 'Автор неизвестен';
-    } else {
-      authorText.innerText = quoteObj.quoteAuthor;
-    }
-    // Reduce font size for long quotes
-    if(quoteObj.quoteText.length > 120) {
-      quoteText.classList.add('long-quote');
-    } else {
-      quoteText.classList.remove('long-quote');
-    }
-    quoteText.innerText = quoteObj.quoteText;
-    // Stop loader, Show Quote
-    complete();
-  } catch (error) {
-    console.log(error)
+  let number = Math.floor(Math.random() * 202);
+  const quoteObj = JSON.parse(quotes);
+  let author;
+  for(const authorName in quoteObj[number]) {
+    author = authorName;
+   }
+  let objQuoteText = quoteObj[number][author];
+  authorText.innerText = author;
+  quoteText.innerText = objQuoteText;
+  // Reduce font size for long quotes
+  if(quoteText.length > 120) {
+    quoteText.classList.add('long-quote');
+  } else {
+    quoteText.classList.remove('long-quote');
   }
+  // Stop loader, Show Quote
+  complete();
 }
+
 
 // Tweet quote
 function tweetQuote() {
@@ -95,6 +87,8 @@ function languageChange() {
   }
 }
 
+// Get english quote fron an API
+
 async function getEnglishQuote() {
   loading();
   const apiUrl = 'https://type.fit/api/quotes/?method=getQuote&lang=ru&format=json';
@@ -120,6 +114,7 @@ async function getEnglishQuote() {
     // Stop loader, Show Quote
     complete();
   } catch (error) {
-    console.log(error);
+    getEnglishQuote()
   }
 }
+
