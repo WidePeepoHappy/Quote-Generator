@@ -31,8 +31,6 @@ async function getRussianQuote() {
     const response = await fetch(proxyUrl + encodeURIComponent(apiUrl));
     const data = await response.json();
     const quoteObj = JSON.parse(data.contents);
-    console.log(data);
-    console.log(quoteObj);
     if (quoteObj.quoteAuthor === '') {
       authorText.innerText = 'Автор неизвестен';
     } else {
@@ -79,10 +77,8 @@ for(let i=0; i<language.length; i++) {
 newQuoteBtn.addEventListener('click', () => {
   if(language[0].checked === true) {
     getRussianQuote();
-    console.log('russian');
   } else {
     getEnglishQuote();
-    console.log('english');
   }
 });
 twitterBtn.addEventListener('click', tweetQuote);
