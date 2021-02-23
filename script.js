@@ -22,23 +22,25 @@ function complete() {
 // Get a russian quote from a JSON file
 async function getRussianQuote() {
   loading();
-  let number = Math.floor(Math.random() * 202);
-  const quoteObj = JSON.parse(quotes);
-  let author;
-  for(const authorName in quoteObj[number]) {
-    author = authorName;
-   }
-  let objQuoteText = quoteObj[number][author];
-  authorText.innerText = author;
-  quoteText.innerText = objQuoteText;
-  // Reduce font size for long quotes
-  if(quoteText.length > 120) {
-    quoteText.classList.add('long-quote');
-  } else {
-    quoteText.classList.remove('long-quote');
-  }
-  // Stop loader, Show Quote
-  complete();
+  setTimeout(function() {
+    let number = Math.floor(Math.random() * 201);
+    const quoteObj = JSON.parse(quotes);
+    let author;
+    for(const authorName in quoteObj[number]) {
+      author = authorName;
+     }
+    let objQuoteText = quoteObj[number][author];
+    authorText.innerText = author;
+    quoteText.innerText = objQuoteText;
+    // Reduce font size for long quotes
+    if(quoteText.length > 120) {
+      quoteText.classList.add('long-quote');
+    } else {
+      quoteText.classList.remove('long-quote');
+    }
+    // Stop loader, Show Quote
+    complete();
+  }, 500)
 }
 
 
